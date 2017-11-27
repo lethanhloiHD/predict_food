@@ -103,38 +103,38 @@ if __name__ == '__main__':
 
     # model CNN
     model = Sequential()
-    model.add(Convolution2D(32, 3, 3, activation='relu', input_shape=(size_image, size_image,3)))
+    model.add(Convolution2D(64, 3, 3, activation='relu', input_shape=(size_image, size_image,3)))
     # model.add(MaxPooling2D(pool_size=(2, 2)))
 
-    model.add(Convolution2D(32,(3,3)))
+    model.add(Convolution2D(64,(3,3)))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(Convolution2D(64, (3, 3)))
+    model.add(Convolution2D(128, (3, 3)))
     model.add(Activation('relu'))
     # model.add(MaxPooling2D(pool_size=(2, 2)))
 
-    model.add(Convolution2D(64, (3, 3)))
+    model.add(Convolution2D(128, (3, 3)))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
 
-    model.add(Convolution2D(128, (3, 3)))
+    model.add(Convolution2D(256, (3, 3)))
     model.add(Activation('relu'))
     # model.add(MaxPooling2D(pool_size=(2, 2)))
 
-    model.add(Convolution2D(128, (3, 3)))
+    model.add(Convolution2D(256, (3, 3)))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
     #
-    model.add(Convolution2D(256, (3, 3)))
+    model.add(Convolution2D(512, (3, 3)))
     model.add(Activation('relu'))
     # model.add(MaxPooling2D(pool_size=(2, 2)))
 
-    model.add(Convolution2D(256, (3, 3)))
+    model.add(Convolution2D(512, (3, 3)))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
 
     model.add(Flatten())
-    model.add(Dense(256, activation='relu'))
+    model.add(Dense(4096, activation='relu'))
     model.add(Dropout(0.5))
     # model.add(Dense(128, activation='relu'))
     # model.add(Dropout(0.5))
@@ -146,7 +146,7 @@ if __name__ == '__main__':
 
     model.compile(optimizer=SGD(lr=0.01, momentum=0.9), loss='categorical_crossentropy', metrics=['accuracy'])
 
-    model.fit(X_train, Y_train, batch_size=32, nb_epoch=2, verbose=1, shuffle=True
+    model.fit(X_train, Y_train, batch_size=32, nb_epoch=50, verbose=1, shuffle=True
               ,validation_data=(X_test, Y_test))
 
     score = model.evaluate(X_test, Y_test, verbose=1)
