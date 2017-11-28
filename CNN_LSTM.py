@@ -4,6 +4,9 @@ import matplotlib.image as mpimg
 import os.path
 import numpy as np
 import os
+import json
+import keras.models
+
 from keras.utils import np_utils
 from sklearn.cross_validation import train_test_split
 import matplotlib.pyplot as plt
@@ -19,8 +22,9 @@ from keras import regularizers
 from keras.callbacks import ModelCheckpoint
 
 size_image = 96
-# cutoff = 1000
-# numbers = 39
+data = {}
+data['data'] = []
+
 paths ='food/train1'
 def getSum(path):
     sum = 0
@@ -28,14 +32,10 @@ def getSum(path):
         num = len(os.listdir(os.path.join(path, d)))
         sum += num
     return sum
-#lay tong so file train :
+
 sum = getSum(paths)
-# print(sum)
-#
 Y_all = np.zeros(sum)
 X_all = np.zeros((sum, size_image, size_image, 3), dtype='float64')
-# Y_all = np.zeros(cutoff * numbers)
-# X_all = np.zeros((cutoff * numbers, size_image, size_image, 3), dtype='float64')
 
 def listdirs(path):
     count_X = 0
@@ -47,30 +47,20 @@ def listdirs(path):
             print(d)
             for img in os.listdir(os.path.join(path, d)):
                 if img.endswith("jpg"):
-                    # np.resize()
-                    # image = mpimg.imread(os.path.join(os.path.join(path, d), img))
-                    # image.resize(size_image, size_image, 3)
-
-
                     image = Image.open(os.path.join(os.path.join(path, d), img))
-                    # print (os.path.join(path, d), img)
                     image = image.resize((size_image, size_image), Image.ANTIALIAS)
                     image = np.array(image)
-
-                    # print('%d ...' % count_X, end='\r')
-                    # print image.shape
-                    # print os.path.join(os.path.join(path, d), img)
                     X_all[count_X]= image
                     Y_all[count_X] = label
                     count_X +=1
 
-                    # if local_count >= cutoff:
-                    #     break
+            data['data'].append({
+                'code': label,
+                'name': d
+            })
         label +=1
-        # if(label >= numbers ):
-        #     break
-
-
+    with open('data.txt', 'w') as outfile:
+        json.dump(data, outfile)
 
 #
 if __name__ == '__main__':
@@ -81,7 +71,7 @@ if __name__ == '__main__':
     X_all /= 255.0
     # #print(Y_all)
 
-    X_train,X_test,Y_train,Y_test = train_test_split(X_all, Y_all, test_size=0.1, random_state=42)
+    X_train,X_test,Y_train,Y_test = train_test_split(X_all, Y_all, test_size=0.25, random_state=42)
     print(X_train.shape)
     print(X_test.shape)
     print(Y_train.shape)
@@ -105,15 +95,16 @@ if __name__ == '__main__':
 
     # model CNN
     model = Sequential()
-    model.add(Convolution2D(64, 3, 3, activation='relu', input_shape=(size_image, size_image,3)))
-    # model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Convolution2D(64, 3, 3,
+                            activation='relu',
+                            input_shape=(size_image, size_image,3)))
 
     model.add(Convolution2D(64,(3,3)))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2,2)))
     model.add(Convolution2D(128, (3, 3)))
     model.add(Activation('relu'))
-    # model.add(MaxPooling2D(pool_size=(2, 2)))
+
 
     model.add(Convolution2D(128, (3, 3)))
     model.add(Activation('relu'))
@@ -121,7 +112,7 @@ if __name__ == '__main__':
 
     model.add(Convolution2D(256, (3, 3)))
     model.add(Activation('relu'))
-    # model.add(MaxPooling2D(pool_size=(2, 2)))
+
 
     model.add(Convolution2D(256, (3, 3)))
     model.add(Activation('relu'))
@@ -129,37 +120,38 @@ if __name__ == '__main__':
     #
     model.add(Convolution2D(512, (3, 3)))
     model.add(Activation('relu'))
-    # model.add(MaxPooling2D(pool_size=(2, 2)))
+
 
     model.add(Convolution2D(512, (3, 3)))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
 
     model.add(Flatten())
-    model.add(Dense(512, activation='relu',kernel_regularizer=regularizers.l2(0.01)))
+    model.add(Dense(512, activation='relu',
+                    kernel_regularizer=regularizers.l2(0.01)))
     model.add(Dropout(0.5))
 
 
-    model.add(Dense(sum_laber, activation='softmax'))           
+    model.add(Dense(sum_laber, activation='softmax'))
 
-    # model = VGG16(include_top=True, input_shape=(size_image, size_image, 3),
-    #               classes=sum_laber, weights=None, pooling='max')
+    model.compile(optimizer=SGD(lr=0.01,
+                  momentum=0.9),
+                  loss='categorical_crossentropy',
+                  metrics=['accuracy'])
 
-    model.compile(optimizer=SGD(lr=0.01, momentum=0.9), loss='categorical_crossentropy', metrics=['accuracy'])
-
-    # model.fit(X_train, Y_train, batch_size=32, nb_epoch=50, verbose=1, shuffle=True
-    #           ,validation_data=(X_test, Y_test))
     checkpointer = ModelCheckpoint(filepath='models.h5', verbose=1, save_best_only=True)
-    model.fit_generator(datagen.flow(X_train, Y_train, batch_size=32),
+    model.fit_generator(
+                        datagen.flow(X_train, Y_train, batch_size=32),
+                        steps_per_epoch=X_train.shape[0]/32,
                         validation_data=datagen.flow(X_test,Y_test, batch_size=32),
-                        steps_per_epoch=1000, epochs=20,
-                        callbacks=[checkpointer]
+                        epochs=50,
+                        callbacks=[checkpointer],
+                        validation_steps=Y_train.shape[0]/32,
                         )
 
     score = model.evaluate(X_test, Y_test, verbose=1)
     print ( score )
     model.save('models.h5')
-
 
 
 
