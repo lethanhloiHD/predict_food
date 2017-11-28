@@ -15,6 +15,7 @@ from keras.models import Sequential
 from keras.optimizers import Adam , SGD
 from keras.applications.vgg16 import VGG16
 from PIL import Image
+from keras import regularizers
 
 size_image = 96
 # cutoff = 1000
@@ -134,22 +135,25 @@ if __name__ == '__main__':
     model.add(MaxPooling2D(pool_size=(2, 2)))
 
     model.add(Flatten())
-    model.add(Dense(4096, activation='relu'))
+    model.add(Dense(512, activation='relu',kernel_regularizer=regularizers.l2(0.01)))
     model.add(Dropout(0.5))
-    # model.add(Dense(128, activation='relu'))
-    # model.add(Dropout(0.5))
+
 
     model.add(Dense(sum_laber, activation='softmax'))
 
-    model = VGG16(include_top=True, input_shape=(size_image, size_image, 3),
-                  classes=sum_laber, weights=None, pooling='max')
+    # model = VGG16(include_top=True, input_shape=(size_image, size_image, 3),
+    #               classes=sum_laber, weights=None, pooling='max')
 
     model.compile(optimizer=SGD(lr=0.01, momentum=0.9), loss='categorical_crossentropy', metrics=['accuracy'])
 
-    model.fit(X_train, Y_train, batch_size=32, nb_epoch=50, verbose=1, shuffle=True
-              ,validation_data=(X_test, Y_test))
+    # model.fit(X_train, Y_train, batch_size=32, nb_epoch=50, verbose=1, shuffle=True
+    #           ,validation_data=(X_test, Y_test))
+
+    model.fit_generator(datagen.flow(X_train, Y_train, batch_size=32),
+                  steps_per_epoch=1000, epochs=20)
 
     score = model.evaluate(X_test, Y_test, verbose=1)
+    print ( score )
     model.save('models.h5')
 
 
