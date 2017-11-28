@@ -151,7 +151,7 @@ if __name__ == '__main__':
     #           ,validation_data=(X_test, Y_test))
     checkpointer = ModelCheckpoint(filepath='models.h5', verbose=1, save_best_only=True)
     model.fit_generator(datagen.flow(X_train, Y_train, batch_size=32),
-                        validation_data=datagen.flow(X_test,Y_test),
+                        validation_data=datagen.flow(X_test,Y_test, batch_size=32),
                         steps_per_epoch=1000, epochs=20,
                         callbacks=[checkpointer]
                         )
