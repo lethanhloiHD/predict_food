@@ -16,6 +16,7 @@ from keras.optimizers import Adam , SGD
 from keras.applications.vgg16 import VGG16
 from PIL import Image
 from keras import regularizers
+from keras.callbacks import ModelCheckpoint
 
 size_image = 96
 # cutoff = 1000
@@ -148,8 +149,9 @@ if __name__ == '__main__':
 
     # model.fit(X_train, Y_train, batch_size=32, nb_epoch=50, verbose=1, shuffle=True
     #           ,validation_data=(X_test, Y_test))
-
+    checkpointer = ModelCheckpoint(filepath='models.h5', verbose=1, save_best_only=True)
     model.fit_generator(datagen.flow(X_train, Y_train, batch_size=32),
+                        validation_data=datagen.flow(X_test,Y_test),
                   steps_per_epoch=1000, epochs=20)
 
     score = model.evaluate(X_test, Y_test, verbose=1)
