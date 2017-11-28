@@ -140,7 +140,7 @@ if __name__ == '__main__':
     model.add(Dropout(0.5))
 
 
-    model.add(Dense(sum_laber, activation='softmax'))
+    model.add(Dense(sum_laber, activation='softmax'))           
 
     # model = VGG16(include_top=True, input_shape=(size_image, size_image, 3),
     #               classes=sum_laber, weights=None, pooling='max')
