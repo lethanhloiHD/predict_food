@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+
+	<link href="https://fonts.googleapis.com/css?family=Lobster|Roboto+Slab" rel="stylesheet">
+
+  	<script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  	<link rel="stylesheet" type="text/css" href="css/style.css">
+  	<script type="text/javascript" src="js/script.js"></script>
+
+  	<link rel='stylesheet' href='https://cdn.rawgit.com/daneden/animate.css/v3.1.0/animate.min.css'>
+    <script src='https://cdn.rawgit.com/matthieua/WOW/1.0.1/dist/wow.min.js'></script>
+    <script>
+    new WOW().init();
+    </script>
+
+<!-- Load image -->
+<!--   	<script>
+  		var loadFile = function(event) {
+	    	var reader = new FileReader();
+	    	reader.onload = function(){
+		      	var output = document.getElementById('output');
+		      	output.src = reader.result;
+		      	console.log(reader.result);
+
+		      	var name = document.getElementById('food');
+		      	document.getElementById("name-food").innerHTML = name.files.item(0).name;
+
+    		};
+    	reader.readAsDataURL(event.target.files[0]);
+  		};
+
+</script> -->
+<!-- end load image -->
+
+</head>
+<body>
+<div class="container-fluid fluid">
+	<!-- start header -->
+	<div class="container-fluid" id="header" >
+		<div class="row">
+			<div class="col-md-2 col-sm-2">
+			<!--  img-thumbnail -->
+				<img src="./images/logo2.png" class="img-responsive" alt="F5">
+
+			</div>
+			<div class="col-md-8 col-sm-8 text-center text">
+				<div class="wow bounceInLeft" data-wow-duration="2s"><h1>HỆ THỐNG NHẬN DIỆN MÓN ĂN</h1></div>
+				<!-- <div class="wow bounceInRight" data-wow-duration="2s"><h3>NHOM ...</h3></div> -->
+			</div>
+		</div>
+	</div>
+
+	<!-- end header -->
+
+	<!-- start choose image -->
+	<div class="text-center">
+		<form role="form">
+			<div class="form-group">
+			    <label for="exampleInputFile"><h2>Chọn món ăn cần nhận diện</h2></label>
+                <input type="file" id="food" name="food" class="center-block" accept="image/*" >
+			    <!-- <input type="file" id="food" name="food" class="center-block" accept="image/*" onchange="loadFile(event)" > -->
+  			</div>
+		</form>
+	</div>
+
+	<!-- end choose image -->
+
+	<!-- start image and content -->
+	<div class="container-fluid" id="content" >
+		<div class="row">
+			<div class="col-sm-offset-2 col-md-4 col-sm-4 col-xs-12 col-md-6">
+				<h3>Tên món ăn: <span id="name-food">F5 F5 F5</span> </h3>
+				<img id="output" src="images/H10.png" class="img-responsive img-thumbnail" alt="Food">
+			</div>
+
+
+			<div class="col-md-5 col-sm-5  col-xs-12 col-md-6 skill">
+				<h3>Kết quả:</h3>
+				<div class="col-sm-12 col col1 skillbar skillbar1 clearfix " data-percent="90%">
+                    <!-- <div class="skillbar-title" style="background: #d35400;"><span>Mon an 1</span></div> -->
+                    <div class="skillbar-title"><span>Mon an 1</span></div>
+                    <div class="skillbar-bar" style="background: #fc7700;"></div>
+                    <div class="skill-bar-percent"><strong>90%</strong></div>
+                </div>
+
+                <div class="col-sm-12 col col1 skillbar skillbar2 clearfix " data-percent="85%">
+                    <!-- <div class="skillbar-title" style="background: #d35400;"><span>Mon an 2</span></div> -->
+                    <div class="skillbar-title"><span>Mon an 2</span></div>
+                    <div class="skillbar-bar" style="background: #fc7700;"></div>
+                    <div class="skill-bar-percent"><strong>85%</strong></div>
+                </div>
+
+                <div class="col-sm-12 col col1 skillbar skillbar3 clearfix " data-percent="90%">
+                    <!-- <div class="skillbar-title" style="background: #d35400;"><span>Mon an 1</span></div> -->
+                    <div class="skillbar-title"><span>Mon an 1</span></div>
+                    <div class="skillbar-bar" style="background: #fc7700;"></div>
+                    <div class="skill-bar-percent"><strong>90%</strong></div>
+                </div>
+
+                <div class="col-sm-12 col col1 skillbar skillbar4 clearfix " data-percent="90%">
+                    <!-- <div class="skillbar-title" style="background: #d35400;"><span>Mon an 1</span></div> -->
+                    <div class="skillbar-title"><span>Mon an 1</span></div>
+                    <div class="skillbar-bar" style="background: #fc7700;"></div>
+                    <div class="skill-bar-percent"><strong>90%</strong></div>
+                </div>
+
+                <div class="col-sm-12 col col1 skillbar skillbar5 clearfix " data-percent="85%">
+                    <!-- <div class="skillbar-title" style="background: #d35400;"><span>Mon an 2</span></div> -->
+                    <div class="skillbar-title"><span>Mon an 2</span></div>
+                    <div class="skillbar-bar" style="background: #fc7700;"></div>
+                    <div class="skill-bar-percent"><strong>85%</strong></div>
+                </div>
+
+                <div class="col-sm-12 col col1 skillbar skillbar6 clearfix " data-percent="90%">
+                    <!-- <div class="skillbar-title" style="background: #d35400;"><span>Mon an 1</span></div> -->
+                    <div class="skillbar-title"><span>Mon an 1</span></div>
+                    <div class="skillbar-bar" style="background: #fc7700;"></div>
+                    <div class="skill-bar-percent"><strong>90%</strong></div>
+                </div>
+            </div>
+		</div>
+	</div>
+	<!-- end image and content -->
+
+	<!-- ==== blog ==== -->
+    <div id="blog">
+        <div class="container">
+            <div class="row text-center clearfix">
+                <!-- HEAD TEXT -->
+                <div class="col-sm-8 col-sm-offset-2 blog-text">
+                    <h2>OUR TEAM</h2>
+                    <P>Follow your passion, success will come to you</P>
+                    <p>Believe in yourself and never give up</p>
+                </div>
+                <!-- images -->
+                <div class="row">
+                    <!-- single blog 1 -->
+                    <div class="col-sm-4 blog-div wow fadeInUp" data-wow-duration="2s">
+                        <div class="single-blog text-center">
+                            <img src="images/Thang.jpg" alt="Thang">
+                            <h3>Nguyễn Đức Thắng</h3>
+
+                            <p>Full Stack Web Developer</p>
+                            <p>Over two years of experience</p>
+														<p style="color : red ">NO GIRL FRIEND</p>
+                            <!-- <a href="#" class="btn read-more" data-toggle="modal" data-target="blog-detail-2">READ MORE</a> -->
+
+                            <div class="socials">
+                                <div class="fb"><a href="#"><i class="fa fa-facebook" ></i></a></div>
+                                <div class="tt"><a href="#"><i class="fa fa-twitter"></i></a></div>
+                                <div class="gp"><a href="#"><i class="fa fa-google-plus"></i></a></div>
+                                <div class="db"><a href="#"><i class="fa fa-dribbble"></i></a></div>
+                                <div class="lk"><a href="#"><i class="fa fa-linkedin"></i></a></div>
+                            </div>
+                        </div>
+                        <!-- detail blog 1 -->
+                        <div class="modal fade" id="blog-detail-1" style="display: none"></div>
+                    </div>
+                    <!-- single blog 2 -->
+                    <div class="col-sm-4 blog-div wow fadeInUp" data-wow-duration="2s">
+                        <div class="single-blog text-center">
+                            <img src="images/loi.jpg" alt="Thang">
+                            <h3>Lê Thành Lợi</h3>
+                      		<p>Full Stack Web Developer</p>
+                      		<p>Over two years of experience</p>
+													<p style="color : red ">NO GIRL FRIEND</p>
+                            <div class="socials">
+                                <div class="fb"><a href="#"><i class="fa fa-facebook"></i></a></div>
+                                <div class="tt"><a href="#"><i class="fa fa-twitter"></i></a></div>
+                                <div class="gp"><a href="#"><i class="fa fa-google-plus"></i></a></div>
+                                <div class="db"><a href="#"><i class="fa fa-dribbble"></i></a></div>
+                                <div class="lk"><a href="#"><i class="fa fa-linkedin"></i></a></div>
+                            </div>
+                        </div>
+                        <!-- detail blog 2 -->
+                        <div class="modal fade" id="blog-detail-2" style="display: none"></div>
+                    </div>
+                    <!-- single blog 3 -->
+                    <div class="col-sm-4 blog-div wow fadeInUp" data-wow-duration="2s">
+                        <div class="single-blog text-center">
+                            <img src="images/huy.jpg" alt="Huy">
+                            <h3>Trần Đình Huy</h3>
+                            <p>Full Stack Web Developer</p>
+                            <p>Over two years of experience</p>
+														<p style="color : red ">NO GIRL FRIEND</p>
+                            <div class="socials">
+                                <div class="fb"><a href="#"><i class="fa fa-facebook"></i></a></div>
+                                <div class="tt"><a href="#"><i class="fa fa-twitter"></i></a></div>
+                                <div class="gp"><a href="#"><i class="fa fa-google-plus"></i></a></div>
+                                <div class="db"><a href="#"><i class="fa fa-dribbble"></i></a></div>
+                                <div class="lk"><a href="#"><i class="fa fa-linkedin"></i></a></div>
+                            </div>
+                        </div>
+                        <!-- detail blog 3 -->
+                        <div class="modal fade" id="blog-detail-3" style="display: none"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- single blog 4 -->
+                    <div class="col-sm-offset-2 col-sm-4 blog-div wow fadeInUp" data-wow-duration="2s">
+                        <div class="single-blog text-center">
+                            <img src="images/hong2.png" alt="Hong">
+                            <h3>Tống Thị Hồng</h3>
+                            <p>Full Stack Web Developer</p>
+                            <p>Over two years of experience</p>
+														<p style="color : red ">NO BOY FRIEND</p>
+                            <div class="socials">
+                                <div class="fb"><a href="#"><i class="fa fa-facebook"></i></a></div>
+                                <div class="tt"><a href="#"><i class="fa fa-twitter"></i></a></div>
+                                <div class="gp"><a href="#"><i class="fa fa-google-plus"></i></a></div>
+                                <div class="db"><a href="#"><i class="fa fa-dribbble"></i></a></div>
+                                <div class="lk"><a href="#"><i class="fa fa-linkedin"></i></a></div>
+                            </div>
+                        </div>
+                        <!-- detail blog 4 -->
+                        <div class="modal fade" id="blog-detail-4" style="display: none"></div>
+                    </div>
+                    <!-- single blog 5 -->
+                    <div class="col-sm-4 blog-div wow fadeInUp" data-wow-duration="2s">
+                        <div class="single-blog text-center">
+                            <img src="images/hong2.png" alt="Nga">
+                            <h3>Lê Thị Nga</h3>
+
+                            <p>Full Stack Web Developer</p>
+                            <p>Over two years of experience</p>
+														<p style="color : red ">NO BOY FRIEND</p>
+                            <div class="socials">
+                                <div class="fb"><a href="#"><i class="fa fa-facebook"></i></a></div>
+                                <div class="tt"><a href="#"><i class="fa fa-twitter"></i></a></div>
+                                <div class="gp"><a href="#"><i class="fa fa-google-plus"></i></a></div>
+                                <div class="db"><a href="#"><i class="fa fa-dribbble"></i></a></div>
+                                <div class="lk"><a href="#"><i class="fa fa-linkedin"></i></a></div>
+                            </div>
+                        </div>
+                        <!-- detail blog 5 -->
+                        <div class="modal fade" id="blog-detail-5" style="display: none"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- ==== end blog ==== -->
+
+  <div id="footer" class="text-center" >
+        <marquee behavior="alternate" scrollamount="3" >
+            <p>Copyright &copy 2017 - <a href="#"><span style="color: #fc7700">TongHong</span></a> | All Rights Reserved</p>
+        </marquee>
+        <!-- ==== end footer ==== -->
+    </div>
+
+</div>
+
+
+
+</body>
+</html>
