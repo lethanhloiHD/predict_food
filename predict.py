@@ -25,7 +25,7 @@ with open('data.txt') as json_file:
     data = json.load(json_file)
     for p in data['data']:
         if(classes == p['code']):
-            print('Name: ' + p['name'])
+            print('  Name: ' + p['name'])
             print ( pred )
 
 #
