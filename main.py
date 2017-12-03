@@ -71,7 +71,7 @@ if __name__ == '__main__':
     X_all /= 255.0
     # #print(Y_all)
 
-    X_train,X_test,Y_train,Y_test = train_test_split(X_all, Y_all, test_size=0.25, random_state=42)
+    X_train,X_test,Y_train,Y_test = train_test_split(X_all, Y_all, test_size=0.2, random_state=42)
     print(X_train.shape)
     print(X_test.shape)
     print(Y_train.shape)
@@ -95,9 +95,7 @@ if __name__ == '__main__':
 
     # model CNN
     model = Sequential()
-    model.add(Convolution2D(64, 3, 3,
-                            activation='relu',
-                            input_shape=(size_image, size_image,3)))
+    model.add(Convolution2D(64, (3, 3),activation='relu',input_shape=(size_image, size_image,3)))
 
     model.add(Convolution2D(64,(3,3)))
     model.add(Activation('relu'))
@@ -128,14 +126,18 @@ if __name__ == '__main__':
 
     model.add(Flatten())
     model.add(Dense(512, activation='relu',
-                    kernel_regularizer=regularizers.l2(0.01)))
+                    kernel_regularizer=regularizers.l2(0.01),
+                    activity_regularizer = regularizers.l1(0.01)))
+    model.add(Dropout(0.5))
+    model.add(Dense(512, activation='relu',
+                    kernel_regularizer=regularizers.l2(0.01),
+                    activity_regularizer=regularizers.l1(0.01)))
     model.add(Dropout(0.5))
 
 
     model.add(Dense(sum_laber, activation='softmax'))
 
-    model.compile(optimizer=SGD(lr=0.01,
-                  momentum=0.9),
+    model.compile(optimizer=SGD(lr=0.01,momentum=0.9),
                   loss='categorical_crossentropy',
                   metrics=['accuracy'])
 
@@ -151,7 +153,7 @@ if __name__ == '__main__':
 
     score = model.evaluate(X_test, Y_test, verbose=1)
     print ( score )
-    model.save('models/models.h5')
+    model.save('models.h5')
 
 
 

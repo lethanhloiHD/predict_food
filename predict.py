@@ -1,5 +1,6 @@
 from keras.models import load_model
 from keras.preprocessing import image
+
 import numpy as np
 import json
 from keras.optimizers import Adam , SGD
@@ -12,7 +13,7 @@ model = load_model('models/models.h5')
 # model.compile(optimizer=SGD(lr=0.001, momentum=0.9), loss='categorical_crossentropy', metrics=['accuracy'])
 
 # predicting images
-img = image.load_img('food/test/pho.jpg', target_size=(img_width, img_height))
+img = image.load_img('food/test/cream.jpg', target_size=(img_width, img_height))
 x = image.img_to_array(img)
 x = np.expand_dims(x, axis=0)
 x /=255.0
@@ -24,7 +25,7 @@ with open('data.txt') as json_file:
     data = json.load(json_file)
     for p in data['data']:
         if(classes == p['code']):
-            print('Name: ' + p['name'])
+            print('  Name: ' + p['name'])
             print ( pred )
 
 #
