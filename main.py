@@ -71,7 +71,7 @@ if __name__ == '__main__':
     X_all /= 255.0
     # #print(Y_all)
 
-    X_train,X_test,Y_train,Y_test = train_test_split(X_all, Y_all, test_size=0.25, random_state=42)
+    X_train,X_test,Y_train,Y_test = train_test_split(X_all, Y_all, test_size=0.2, random_state=42)
     print(X_train.shape)
     print(X_test.shape)
     print(Y_train.shape)
