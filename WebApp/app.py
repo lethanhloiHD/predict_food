@@ -12,9 +12,10 @@ def display_gui():
     return render_template('index.html')
 
 @app.route('/image', methods=['POST'])
-def recognize():
-    data = request.get_json(silent=True)['image']
-    print(data)
+def upldfile():
+    if request.method == 'POST':
+        file_val = request.files['file']
+        return file_val
     # data = request.get_json(silent=True)['image']
     # data = data[22:]
 

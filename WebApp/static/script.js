@@ -21,21 +21,21 @@ $(document).ready(function() {
 			};
 	
 			reader.readAsDataURL(event.target.files[0]);
-	
+		$('#upload-file-btn').click(function() {
+			var form_data = new FormData($('#upload-file')[0]);
 			$.ajax({
-				url : "https://127.0.0.1:5000/image",
-				type : "POST",
-				dataType: 'json', // du lieu tra ve dang json
-				data : JSON.stringify({'image':filename}),
-				success : function (result){
-						$('.skillbar1').attr('data-percent', '60%');
-						$('.skillbar2').attr('data-percent', '80%');
-						$('.skillbar3').attr('data-percent', '50%');
-						$('.skillbar4').attr('data-percent', '10%');
-						$('.skillbar5').attr('data-percent', '90%');
-						$('.skillbar6').attr('data-percent', '20%');
-				}
+				type: 'POST',
+				url: '/image',
+				data: form_data,
+				contentType: false,
+				cache: false,
+				processData: false,
+				async: false,
+				success: function(data) {
+					console.log('Success!');
+				},
 			});
+		});
 			$('.skillbar').each(function() {
 				$(this).find('.skillbar-bar').animate({
 					width: $(this).attr('data-percent')

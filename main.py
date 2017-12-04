@@ -55,7 +55,7 @@ def listdirs(path):
                     count_X +=1
 
             data['data'].append({
-                'code': label,
+                'id': label,
                 'name': d
             })
         label +=1
@@ -96,30 +96,27 @@ if __name__ == '__main__':
     # model CNN
     model = Sequential()
     model.add(Convolution2D(64, (3, 3),activation='relu',input_shape=(size_image, size_image,3)))
-
     model.add(Convolution2D(64,(3,3)))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(Convolution2D(128, (3, 3)))
-    model.add(Activation('relu'))
 
 
     model.add(Convolution2D(128, (3, 3)))
     model.add(Activation('relu'))
+    model.add(Convolution2D(128, (3, 3)))
+    model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
+
 
     model.add(Convolution2D(256, (3, 3)))
     model.add(Activation('relu'))
-
-
     model.add(Convolution2D(256, (3, 3)))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
-    #
+    
+
     model.add(Convolution2D(512, (3, 3)))
     model.add(Activation('relu'))
-
-
     model.add(Convolution2D(512, (3, 3)))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
@@ -127,7 +124,7 @@ if __name__ == '__main__':
     model.add(Flatten())
     model.add(Dense(512, activation='relu',
                     kernel_regularizer=regularizers.l2(0.01),
-                    activity_regularizer = regularizers.l1(0.01)))
+                    ))
     model.add(Dropout(0.5))
 
 
