@@ -7,42 +7,22 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Lobster|Roboto+Slab" rel="stylesheet">
 
-  	<script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+  	<script type="text/javascript" src="{{ url_for('static', filename='jquery-3.2.0.min.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.min.css')}}">
+    <script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='font-awesome.min.css')}}">
 
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-  	<link rel="stylesheet" type="text/css" href="css/style.css">
-  	<script type="text/javascript" src="js/script.js"></script>
+  	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+  	<script type="text/javascript" src="{{ url_for('static', filename='script.js')}}"></script>
 
   	<link rel='stylesheet' href='https://cdn.rawgit.com/daneden/animate.css/v3.1.0/animate.min.css'>
     <script src='https://cdn.rawgit.com/matthieua/WOW/1.0.1/dist/wow.min.js'></script>
     <script>
     new WOW().init();
     </script>
-
-<!-- Load image -->
-<!--   	<script>
-  		var loadFile = function(event) {
-	    	var reader = new FileReader();
-	    	reader.onload = function(){
-		      	var output = document.getElementById('output');
-		      	output.src = reader.result;
-		      	console.log(reader.result);
-
-		      	var name = document.getElementById('food');
-		      	document.getElementById("name-food").innerHTML = name.files.item(0).name;
-
-    		};
-    	reader.readAsDataURL(event.target.files[0]);
-  		};
-
-</script> -->
-<!-- end load image -->
-
 </head>
 <body>
 <div class="container-fluid fluid">
@@ -148,12 +128,12 @@
                     <!-- single blog 1 -->
                     <div class="col-sm-4 blog-div wow fadeInUp" data-wow-duration="2s">
                         <div class="single-blog text-center">
-                            <img src="images/Thang.jpg" alt="Thang">
+                            <img src="./static/Thang.jpg" alt="Thang">
                             <h3>Nguyễn Đức Thắng</h3>
 
                             <p>Full Stack Web Developer</p>
                             <p>Over two years of experience</p>
-														<p style="color : red ">NO GIRL FRIEND</p>
+							<p style="color : red ">NO GIRL FRIEND</p>
                             <!-- <a href="#" class="btn read-more" data-toggle="modal" data-target="blog-detail-2">READ MORE</a> -->
 
                             <div class="socials">
@@ -170,7 +150,7 @@
                     <!-- single blog 2 -->
                     <div class="col-sm-4 blog-div wow fadeInUp" data-wow-duration="2s">
                         <div class="single-blog text-center">
-                            <img src="images/loi.jpg" alt="Thang">
+                            <img src="./static/loi.jpg" alt="Thang">
                             <h3>Lê Thành Lợi</h3>
                       		<p>Full Stack Web Developer</p>
                       		<p>Over two years of experience</p>
@@ -189,7 +169,7 @@
                     <!-- single blog 3 -->
                     <div class="col-sm-4 blog-div wow fadeInUp" data-wow-duration="2s">
                         <div class="single-blog text-center">
-                            <img src="images/huy.jpg" alt="Huy">
+                            <img src="./static/huy.jpg" alt="Huy">
                             <h3>Trần Đình Huy</h3>
                             <p>Full Stack Web Developer</p>
                             <p>Over two years of experience</p>
@@ -210,7 +190,7 @@
                     <!-- single blog 4 -->
                     <div class="col-sm-offset-2 col-sm-4 blog-div wow fadeInUp" data-wow-duration="2s">
                         <div class="single-blog text-center">
-                            <img src="images/hong2.png" alt="Hong">
+                            <img src="./static/hong2.png" alt="Hong">
                             <h3>Tống Thị Hồng</h3>
                             <p>Full Stack Web Developer</p>
                             <p>Over two years of experience</p>
@@ -229,7 +209,7 @@
                     <!-- single blog 5 -->
                     <div class="col-sm-4 blog-div wow fadeInUp" data-wow-duration="2s">
                         <div class="single-blog text-center">
-                            <img src="images/hong2.png" alt="Nga">
+                            <img src="./static/nga1.png" alt="Nga">
                             <h3>Lê Thị Nga</h3>
 
                             <p>Full Stack Web Developer</p>

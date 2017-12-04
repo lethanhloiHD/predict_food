@@ -129,10 +129,6 @@ if __name__ == '__main__':
                     kernel_regularizer=regularizers.l2(0.01),
                     activity_regularizer = regularizers.l1(0.01)))
     model.add(Dropout(0.5))
-    model.add(Dense(512, activation='relu',
-                    kernel_regularizer=regularizers.l2(0.01),
-                    activity_regularizer=regularizers.l1(0.01)))
-    model.add(Dropout(0.5))
 
 
     model.add(Dense(sum_laber, activation='softmax'))
@@ -142,8 +138,7 @@ if __name__ == '__main__':
                   metrics=['accuracy'])
 
     checkpointer = ModelCheckpoint(filepath='models.h5', verbose=1, save_best_only=True)
-    model.fit_generator(
-                        datagen.flow(X_train, Y_train, batch_size=32),
+    model.fit_generator(datagen.flow(X_train, Y_train, batch_size=32),
                         steps_per_epoch=X_train.shape[0]/32,
                         validation_data=datagen.flow(X_test,Y_test, batch_size=32),
                         epochs=50,
