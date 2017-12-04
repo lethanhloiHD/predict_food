@@ -28,26 +28,14 @@ $(document).ready(function() {
 				dataType: 'json', // du lieu tra ve dang json
 				data : JSON.stringify({'image':filename}),
 				success : function (result){
-					// xu li gi o day voi ket qua result tra ve nhe!
-					// 
-	
-			// Doanj nayf gans % train duwowc vaof vowis gias trij tuwowng uwngs
-			$('.skillbar1').attr('data-percent', '60%');
-			$('.skillbar2').attr('data-percent', '80%');
-			$('.skillbar3').attr('data-percent', '50%');
-			$('.skillbar4').attr('data-percent', '10%');
-			$('.skillbar5').attr('data-percent', '90%');
-			$('.skillbar6').attr('data-percent', '20%');
-			// end
-	
-	
+						$('.skillbar1').attr('data-percent', '60%');
+						$('.skillbar2').attr('data-percent', '80%');
+						$('.skillbar3').attr('data-percent', '50%');
+						$('.skillbar4').attr('data-percent', '10%');
+						$('.skillbar5').attr('data-percent', '90%');
+						$('.skillbar6').attr('data-percent', '20%');
 				}
 			});
-	
-			
-	
-	
-	
 			$('.skillbar').each(function() {
 				$(this).find('.skillbar-bar').animate({
 					width: $(this).attr('data-percent')
