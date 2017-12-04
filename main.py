@@ -126,8 +126,7 @@ if __name__ == '__main__':
 
     model.add(Flatten())
     model.add(Dense(512, activation='relu',
-                    kernel_regularizer=regularizers.l2(0.01),
-                    activity_regularizer = regularizers.l1(0.01)))
+                    kernel_regularizer=regularizers.l2(0.01)))
     model.add(Dropout(0.5))
 
 
