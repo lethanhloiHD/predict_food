@@ -3,6 +3,48 @@
 	padding: 0px;
 }
 
+.colorBox>div
+{
+    width:30px;
+    height:30px;
+    background:url(/pics/color.png)
+    
+}
+
+    #contentWrapper{
+        background:#fff;
+        padding:10px 10px 0;
+        box-shadow:3px 2px 5px rgba(0,0,0,.3);
+        margin:20px 0}
+        
+
+.btn-gray{
+    background-color:#ccc;
+    background-image:-moz-linear-gradient(#f4f4f4,#bcbcbc);
+    background-image:-webkit-linear-gradient(#f4f4f4,#bcbcbc);
+    background-image:-ms-linear-gradient(#f4f4f4,#bcbcbc);
+    border-color:#aaa;
+    color:#000}
+    
+    
+.btn-file{
+    position:relative
+}
+
+
+.btn-file input[type=file]{
+    position:absolute;
+    top:0;
+    right:0;
+    min-width:100%;
+    min-height:100%;
+    font-size:999px;
+    text-align:right;
+    filter:alpha(opacity=0);
+    opacity:0;
+    cursor:inherit;
+    display:block}input[readonly]{background-color:#fff!important;cursor:text!important}
+
 .fluid{
 	padding-left: 0px;
     padding-right: 0px;

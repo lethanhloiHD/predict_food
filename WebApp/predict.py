@@ -13,7 +13,6 @@ img_width, img_height = 96, 96
 #
 # load the model we saved
 model = load_model('../models/models.h5')
-# model.compile(optimizer=SGD(lr=0.001, momentum=0.9), loss='categorical_crossentropy', metrics=['accuracy'])
 
 # predicting images
 def predict(path):
@@ -37,4 +36,12 @@ def predict(path):
                     'acc' : pred[0][i]*100
                 })
             i +=1
+        for p in data['data']:
+            if(p['id'] == classes):
+                result.append({
+                    'comment'
+                    'id' : str(classes),
+                    'name': p['name']
+                })      
     return result
+
