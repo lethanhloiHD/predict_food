@@ -46,8 +46,8 @@
 	<!-- start choose image -->
 	<div class="text-center">
 		<form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
-                <strong>Chọn ảnh cần nhận diện :</strong><br>
-                <input style ="padding-left: 600px" id="file-picker" type="file" name="file" accept="image/*" multiple>
+                <strong style="margin-top: 40px;">Chọn ảnh cần nhận diện :</strong><br>
+                <input  style ="padding-left: 300px" id="file-picker" type="file" name="file" accept="image/*" multiple>
                 <div id="msg"></div>
                 <input style ="color: red" type="submit" value="PREDICT" id="upload-button">
         </form>

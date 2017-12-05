@@ -17,6 +17,7 @@ model = load_model('../models/models.h5')
 
 # predicting images
 def predict(path):
+    result = []
     img = image.load_img(path, target_size=(img_width, img_height))
     x = image.img_to_array(img)
     x = np.expand_dims(x, axis=0)
