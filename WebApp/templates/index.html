@@ -46,17 +46,18 @@
 	<!-- start choose image -->
 	<div class="text-center">
 		<form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
-                <strong style="margin-top: 40px;">Chọn ảnh cần nhận diện :</strong><br>
-                <input  style ="padding-left: 300px" id="file-picker" type="file" name="file" accept="image/*" multiple>
+                <strong style="margin-top: 80px;">Chọn ảnh cần nhận diện :</strong><br>
+                <input  style ="padding-left: 400px" id="file-picker" type="file" name="file" accept="image/*" multiple>
                 <div id="msg"></div>
-                <input style ="color: red" type="submit" value="PREDICT" id="upload-button">
+                <!-- <input style ="color: red" type="submit" value="PREDICT" id="upload-button"> -->
+                <input type="submit" class="btn btn-info" value="OK" id="upload-button">
         </form>
 	</div>
 
 	<div class="container-fluid" id="content" >
 		<div class="row">
 			<div class="col-sm-offset-2 col-md-4 col-sm-4 col-xs-12 col-md-6">
-                <h3>Tên món ăn: <span id="name-food"></span> </h3>
+                <h3>Tên món ăn: <span id="name-food">{{datas[10]['name']}}</span> </h3>
                 
 				<img id="output" src="{{url_for('send_image', filename = image_name)}}" class="img-responsive img-thumbnail" alt="Food">
 			</div>
