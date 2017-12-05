@@ -310,3 +310,19 @@ label h2{
     padding-top: 4%;
     color: #43484e;
 }
+
+. 
+ .submitt{
+    background: #5BBD50;
+    font-size: 1.4em;
+    font-weight: 700;
+    /*font-family: 'Roboto', cursive;*/
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    padding: 0.3em 1.6em;
+    color: #fff;
+}
+.submitt:hover{
+    background-color: red;
+}
