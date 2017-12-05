@@ -17,25 +17,11 @@ $(document).ready(function() {
 				$('#output').attr('src', reader.result);
 	
 				filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '');
-				$('#name-food').text(filename);
+				$('#name-food').text();
 			};
 	
-			reader.readAsDataURL(event.target.files[0]);
-		$('#upload-file-btn').click(function() {
-			var form_data = new FormData($('#upload-file')[0]);
-			$.ajax({
-				type: 'POST',
-				url: '/image',
-				data: form_data,
-				contentType: false,
-				cache: false,
-				processData: false,
-				async: false,
-				success: function(data) {
-					console.log('Success!');
-				},
-			});
-		});
+			reader.readAsDataURL(event.target.files[0]);		
+			
 			$('.skillbar').each(function() {
 				$(this).find('.skillbar-bar').animate({
 					width: $(this).attr('data-percent')

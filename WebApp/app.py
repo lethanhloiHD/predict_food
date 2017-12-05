@@ -1,27 +1,34 @@
-import numpy as np
-import base64
+import os
+from predict import predict
 
-from flask import Flask, request,render_template, make_response
+from flask import Flask, request, render_template, send_from_directory
 
-app = Flask(__name__, static_url_path='/static')
-# clf = joblib.load('clf.pkl')
+app = Flask(__name__)
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
+@app.route("/")
+def index():
+    return render_template("index.html")
 
-@app.route('/')
-def display_gui():
-    return render_template('index.html')
+@app.route("/upload", methods=["POST"])
+def upload():
+    target = os.path.join(APP_ROOT, 'images/')
 
-@app.route('/image', methods=['POST'])
-def upldfile():
-    if request.method == 'POST':
-        file_val = request.files['file']
-        return file_val
-    # data = request.get_json(silent=True)['image']
-    # data = data[22:]
+    if not os.path.isdir(target):
+            os.mkdir(target)
+    else:
+        print("Couldn't create upload directory: {}".format(target))
 
-    # img = skio.imread(BytesIO(base64.b64decode(data)))[:,:,3]
+    # for upload in request.files.getlist("file"):
 
-    # img = make_mnist(img)
+    upload=request.files.getlist("file")[0]
+    filename = upload.filename
+    destination = "/".join([target, filename])
+    upload.save(destination)      
+    data = predict('images/'+filename)
+    return render_template("index.html",image_name=filename,datas=data)
+    
 
-    # number = clf.predict(img.reshape(1, -1))[0]
-
+@app.route('/upload/<filename>')
+def send_image(filename):
+    return send_from_directory("images", filename=filename)
