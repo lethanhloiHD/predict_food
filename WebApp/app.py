@@ -10,8 +10,8 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 @app.route("/")
 def index():
     filename = 'static/pho.jpg'
-    data = predict(filename)
-    return render_template("index.html", image_name='pho.jpg', datas = data)
+    data,name = predict(filename)
+    return render_template("index.html", image_name='pho.jpg', datas = data,names=name)
 
 @app.route("/upload", methods=["POST"])
 def upload():
@@ -24,19 +24,12 @@ def upload():
 
     # for upload in request.files.getlist("file"):
     
-    # print request.files.getlist("file")
     upload=request.files.getlist("file")[0]
-    print "lol"
-    print upload
     filename = upload.filename
-    print filename
     destination = "/".join([target, filename])
     upload.save(destination)      
-    print filename
-    data = predict('images/'+filename)
-    print 'data'
-    print data
-    return render_template("index.html",image_name=filename,datas=data)
+    data,name = predict('images/'+filename)
+    return render_template("index.html",image_name=filename,datas=data,names=name)
     
 
 @app.route('/upload/<filename>')

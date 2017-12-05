@@ -8,6 +8,7 @@ from keras.optimizers import Adam , SGD
 
 # result = {}
 result=[]
+name=''
 # dimensions of our images
 img_width, img_height = 96, 96
 #
@@ -38,10 +39,8 @@ def predict(path):
             i +=1
         for p in data['data']:
             if(p['id'] == classes):
-                result.append({
-                    'comment'
-                    'id' : str(classes),
-                    'name': p['name']
-                })      
-    return result
+                name = p['name']
+   
+    return (result,name)
+
 

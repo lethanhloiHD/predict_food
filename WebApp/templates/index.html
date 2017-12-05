@@ -48,35 +48,29 @@
 		<form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
 
         <div class="col-sm-8 col-sm-offset-2 blog-text">
-                    <h2>Chon mon an can nhan dien</h2>
+                    <h2>Chọn món ăn cần nhận diện</h2>
                 </div>
-                <strong style="margin-top: 40px;">Chọn ảnh cần nhận diện :</strong><br>
                 <input  style ="padding-left: 300px" id="file-picker" type="file" name="file" accept="image/*" multiple>
                 <div id="msg"></div>
                 <input type="submit" style="background: #5BBD50;
-    font-size: 1.4em;
-    font-weight: 700;
-    /*font-family: 'Roboto', cursive;*/
-    border-radius: 20px;
-    border: none;
-    outline: none;
-    padding: 0.3em 1.6em;
-    color: #fff;" value="PREDICT"  class="submitt">
+                                            font-size: 1.4em;
+                                            font-weight: 700;
+                                            /*font-family: 'Roboto', cursive;*/
+                                            border-radius: 20px;
+                                            border: none;
+                                            outline: none;
+                                            padding: 0.3em 1.6em;
+                                            color: #fff;" value="PREDICT"  class="submitt">
 
         </form>
 	</div>
-    <!--  -->
+
 
 
 	<div class="container-fluid" id="content" >
 		<div class="row">
-<<<<<<< HEAD
-			<div class="col-sm-offset-1 col-md-4 col-sm-4 col-xs-12 ">
-                <h3>Tên món ăn: <span id="name-food"></span> </h3>
-=======
 			<div class="col-sm-offset-2 col-md-4 col-sm-4 col-xs-12 col-md-6">
-                <h3>Tên món ăn: <span id="name-food">{{datas[10]['name']}}</span> </h3>
->>>>>>> 3380945d7333337f35e2ce420b041356f2b5214b
+                <h3>Tên món ăn: <span id="name-food">{{names}}</span> </h3>
                 
 				<img id="output" src="{{url_for('send_image', filename = image_name)}}" class="img-responsive img-thumbnail" alt="Food">
 			</div>
