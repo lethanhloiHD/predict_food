@@ -5,26 +5,28 @@ import numpy as np
 import os
 import json
 import keras.models
+from keras.applications.inception_v3 import InceptionV3
 from keras.utils import np_utils
 from sklearn.cross_validation import train_test_split
 import matplotlib.pyplot as plt
 from glob import glob
 from keras.callbacks import ReduceLROnPlateau, EarlyStopping
 from keras.layers import Dense, Dropout, Activation, Flatten, Input
-from keras.layers import Convolution2D, MaxPooling2D
-from keras.models import Sequential
-from keras.optimizers import Adam , SGD
+from keras.layers import Convolution2D, MaxPooling2D, ZeroPadding2D, GlobalAveragePooling2D, AveragePooling2D
+from keras.layers.normalization import BatchNormalization
+from keras.models import Sequential, Model
+from keras.optimizers import Adam, SGD
 from keras.applications.vgg16 import VGG16
 from PIL import Image
 from keras import regularizers
-from keras.callbacks import ModelCheckpoint,CSVLogger
-from keras.applications.inception_v3 import InceptionV3
+from keras.callbacks import ModelCheckpoint, CSVLogger
 
 size_image = 96
 data = {}
 data['data'] = []
 
-paths ='food/train'
+paths = 'food/train'
+
 
 def getSum(path):
     sum = 0
@@ -32,14 +34,17 @@ def getSum(path):
         num = len(os.listdir(os.path.join(path, d)))
         sum += num
     return sum
+
+
 sum = getSum(paths)
 Y_all = np.zeros(sum)
 X_all = np.zeros((sum, size_image, size_image, 3), dtype='float64')
 
-def init(path):
 
+def init(path):
     count_X = 0
     label = 0
+
     for d in os.listdir(path):
         if os.path.isdir(os.path.join(path, d)):
             for img in os.listdir(os.path.join(path, d)):
@@ -47,19 +52,56 @@ def init(path):
                     image = Image.open(os.path.join(os.path.join(path, d), img))
                     image = image.resize((size_image, size_image), Image.ANTIALIAS)
                     image = np.array(image)
-                    X_all[count_X]= image
+                    X_all[count_X] = image
                     Y_all[count_X] = label
-                    count_X +=1
+                    count_X += 1
 
             data['data'].append({
                 'id': label,
                 'name': d
             })
-        label +=1
-    with open('data2.txt', 'w') as outfile:
+        label += 1
+    with open('data_incep.txt', 'w') as outfile:
         json.dump(data, outfile)
 
 
+def models():
+    model = Sequential()
+    model.add(Convolution2D(64, (3, 3), activation='relu', input_shape=(size_image, size_image, 3)))
+    model.add(Convolution2D(64, (3, 3)))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+
+    model.add(Convolution2D(128, (3, 3)))
+    model.add(Activation('relu'))
+    model.add(Convolution2D(128, (3, 3)))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+
+    model.add(Convolution2D(256, (3, 3)))
+    model.add(Activation('relu'))
+    model.add(Convolution2D(256, (3, 3)))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+
+    model.add(Convolution2D(512, (3, 3)))
+    model.add(Activation('relu'))
+    model.add(Convolution2D(512, (3, 3)))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+
+    model.add(Flatten())
+    model.add(Dense(512, activation='relu',
+                    kernel_regularizer=regularizers.l2(0.01),
+                    ))
+    model.add(Dropout(0.5))
+
+    model.add(Dense(sum_laber, activation='softmax'))
+
+    return model
+
+
+#
 if __name__ == '__main__':
     init(paths)
     sum_laber = len(os.listdir(paths))
@@ -84,23 +126,52 @@ if __name__ == '__main__':
         fill_mode='nearest')
     datagen.fit(X_train)
 
+    # generator = datagen.flow(X_train, Y_train, batch_size=32)
+    # val_generator = datagen.flow(X_test, Y_test, batch_size=32)
 
-    # #
-    model = VGG16(include_top=False,
-                  weights='imagenet')
+    base_model = InceptionV3(weights='imagenet', include_top=False, input_tensor=Input(shape=(96, 96, 3)))
+    x = base_model.output
+    x = GlobalAveragePooling2D()(x)
+    # # x = Flatten()(x)
+    x = Dense(4096)(x)
+    x = BatchNormalization()(x)
+    x = Activation('relu')(x)
+    x = Dropout(.5)(x)
+    predictions = Dense(sum_laber, activation='softmax')(x)
+
+    model = Model(input=base_model.input, output=predictions)
+    # model = VGG16()
+
+    for layer in model.layers[:172]:
+        layer.trainable = False
+    for layer in model.layers[172:]:
+        layer.trainable = True
 
     model.compile(optimizer=SGD(lr=0.01, momentum=0.9),
                   loss='categorical_crossentropy',
                   metrics=['accuracy'])
 
-    checkpointer = ModelCheckpoint(filepath='models_vgg.h5', verbose=1, save_best_only=True)
-    csv_logger = CSVLogger('train_vgg.csv')
+    checkpointer = ModelCheckpoint(filepath='models_incep.h5', verbose=1, save_best_only=True)
+    csv_logger = CSVLogger('train_incep.csv')
+
     model.fit_generator(datagen.flow(X_train, Y_train, batch_size=32),
                         steps_per_epoch=X_train.shape[0] / 32,
                         validation_data=datagen.flow(X_test, Y_test, batch_size=32),
                         epochs=50,
-                        callbacks=[csv_logger, checkpointer],
+                        callbacks=[checkpointer, csv_logger],
                         validation_steps=Y_train.shape[0] / 32,
                         )
 
     score = model.evaluate(X_test, Y_test, verbose=1)
+
+
+
+
+
+
+
+
+
+
+
+
