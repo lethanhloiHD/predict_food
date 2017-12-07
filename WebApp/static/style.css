@@ -353,18 +353,23 @@ label h2{
     color: #43484e;
 }
 
-. 
- .submitt{
-    background: #5BBD50;
-    font-size: 1.4em;
-    font-weight: 700;
-    /*font-family: 'Roboto', cursive;*/
-    border-radius: 20px;
-    border: none;
-    outline: none;
-    padding: 0.3em 1.6em;
-    color: #fff;
+input[type=file]{
+
 }
-.submitt:hover{
-    background-color: red;
+
+
+input[type=submit]{
+    margin-top: 20px; margin-bottom: 30px; background: #5BBD50;
+                                            font-size: 1.4em;
+                                            font-weight: 700;
+                                            font-family: 'Roboto', cursive;
+                                            border-radius: 20px;
+                                            border: none;
+                                            outline: none;
+                                            padding: 0.3em 1.6em;
+                                            color: #fff;
+}
+
+input[type=submit]:hover{
+    background-color: #fc7700;
 }

@@ -26,6 +26,7 @@
 </head>
 <body>
 <div class="container-fluid fluid">
+
 	<!-- start header -->
 	<div class="container-fluid" id="header" >
 		<div class="row">
@@ -50,10 +51,7 @@
         <div class="col-sm-8 col-sm-offset-2 blog-text">
                     <h2>Chọn món ăn cần nhận diện</h2>
                 </div>
-                <input  style ="padding-left: 300px" id="file-picker" type="file" name="file" accept="image/*" multiple>
-                <div id="msg"></div>
-                <input type="submit"    
-                       style="background: #5BBD50;
+                <input  style ="margin: 0 auto; background: #5BBD50;
                                             font-size: 1.4em;
                                             font-weight: 700;
                                             /*font-family: 'Roboto', cursive;*/
@@ -61,7 +59,18 @@
                                             border: none;
                                             outline: none;
                                             padding: 0.3em 1.6em;
-                                            color: #fff;" value="PREDICT"  class="submitt">
+                                            color: #fff;" id="file-picker" type="file" name="file" accept="image/*" multiple>
+                <div id="msg"></div>
+                <input type="submit"
+                       value="PREDICT"  id="predic" style="margin-top: 20px; margin-bottom: 30px; background: #5BBD50;
+                                            font-size: 1.4em;
+                                            font-weight: 700;
+                                            font-family: 'Roboto', cursive;
+                                            border-radius: 20px;
+                                            border: none;
+                                            outline: none;
+                                            padding: 0.3em 1.6em;
+                                            color: #fff;">
 
         </form>
 	</div>

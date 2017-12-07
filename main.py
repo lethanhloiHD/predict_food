@@ -17,7 +17,7 @@ from keras.optimizers import Adam , SGD
 from keras.applications.vgg16 import VGG16
 from PIL import Image
 from keras import regularizers
-from keras.callbacks import ModelCheckpoint
+from keras.callbacks import ModelCheckpoint,CSVLogger
 
 size_image = 96
 data = {}
@@ -32,11 +32,11 @@ def getSum(path):
         sum += num
     return sum
 
-def init(path):
-    sum = getSum(paths)
-    Y_all = np.zeros(sum)
-    X_all = np.zeros((sum, size_image, size_image, 3), dtype='float64')
+sum = getSum(paths)
+Y_all = np.zeros(sum)
+X_all = np.zeros((sum, size_image, size_image, 3), dtype='float64')
 
+def init(path):
     count_X = 0
     label = 0
 
@@ -133,11 +133,12 @@ if __name__ == '__main__':
                   metrics=['accuracy'])
 
     checkpointer = ModelCheckpoint(filepath='modles/models.h5', verbose=1, save_best_only=True)
+    csv_logger = CSVLogger('train.csv')
     model.fit_generator(datagen.flow(X_train, Y_train, batch_size=32),
                         steps_per_epoch=X_train.shape[0]/32,
                         validation_data=datagen.flow(X_test,Y_test, batch_size=32),
                         epochs=50,
-                        callbacks=[checkpointer],
+                        callbacks=[checkpointer,csv_logger],
                         validation_steps=Y_train.shape[0]/32,
                         )
 

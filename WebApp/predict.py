@@ -3,7 +3,6 @@ from keras.preprocessing import image
 
 import numpy as np
 import json
-from keras.optimizers import Adam , SGD
 
 
 # result = {}
@@ -18,14 +17,15 @@ model = load_model('../models/models.h5')
 # predicting images
 def predict(path):
     result = []
-    img = image.load_img(path, target_size=(img_width, img_height))
-    x = image.img_to_array(img)
+    img = image.load_img(path, target_size=(img_width, img_height)) #load anh
+    x = image.img_to_array(img) # chuyen anh ve dang ma tran
     x = np.expand_dims(x, axis=0)
-    x /=255.0
+    x /=255.0  # chuan hoa anh ve dang o-1
 
     images = np.vstack([x])
-    classes = model.predict_classes(images, batch_size=10)
-    pred = model.predict(images)
+    classes = model.predict_classes(images, batch_size=10) # dua ra luon anh ten la gi , dua ra id cua anh
+    pred = model.predict(images) # dua ra % ty le anh day thuoc vao lop anh nao
+    print (pred)
 
     with open('../data.txt') as json_file:
         data = json.load(json_file)
@@ -44,3 +44,5 @@ def predict(path):
     return (result,name)
 
 
+# if __name__ == '__main__':
+#     predict('images/cream.jpg')
